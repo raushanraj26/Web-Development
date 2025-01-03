@@ -1,0 +1,17 @@
+body{
+    text-align: center;
+    /* display: flex;
+    justify-content: cenetr; */
+}
+div{
+    height: 100px;
+    width: 500px;
+    border: 1px solid black;
+    margin: auto;
+}
+.box{
+    height: 100px;
+    width: 100px;
+    background-color: pink;
+    border: 1px solid black;
+}

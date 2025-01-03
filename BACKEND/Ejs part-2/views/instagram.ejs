@@ -1,0 +1,30 @@
+
+<%- include("include/head.ejs") %>
+
+
+<!-- instagram.ej ka head part code "include/head.js" isme hai so upr wala code likhaa gya hai -->
+
+<body>
+    <h2>This page belongs to @<%= data.name %></h2>
+
+    <button>Follow</button>
+    <button>Message</button>
+    <p>
+        folllowers:<%= data.followers %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Following:<%= data.following %>
+    </p>
+    <hr/>
+    <% for(let post of data.posts){ %>
+        <img src="<%= post.image %>" alt="some image" />
+        <p>
+            likes: <%= post.likes %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+            comments: <%= post.comments %>
+        </p>
+        <% } %>
+
+
+        <%- include("include/footer.ejs") %>
+
+</body>
+ <!-- link app.js for serving javascript -->
+<script src="/app.js"></script>
+</html>
