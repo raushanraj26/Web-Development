@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINI  Whatsapp chats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>All chats</h3>
+    <form method="get" action="/chats/new">
+        <button>new chat</button>
+    </form>
+
+   <% for (let chat of chats){  %>
+        <div class="chat">
+            <p>From: <i><%= chat.from %></i></p>
+            <div class="msg">
+                <p>message is : <%= chat.msg %></p>
+                    
+                 <!-- for message edit -->
+                <form method="GET" action="/chats/<%= chat._id %>/edit"><button>Edit msg</button></form>
+                <!-- for msg delete -->
+                 <br>
+                 <form method="GET" action="/chats/<%= chat._id%>/edit?_method=DELETE"> <button>Delete msg</button></form>
+            </div>
+            <p>Received by : <i><%= chat.to %></i></p>
+            <hr>
+            <p><%= chat.created_at.toString().split(" ")[4] %> </p>    
+                                                                      <!-- jaha jaha space asa rha tha waha se split hua and string m chaange hua means index based -->
+            <p><%= chat.created_at.toString().split(" ").slice(0,4).join(" ") %> </p>
+        </div>
+        <br><br>
+   <% } %>
+
+</body>
+</html>
+
