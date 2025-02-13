@@ -21,13 +21,13 @@ const expressError=require("./expressError");           //require expressError f
 
 // using next() middleware
 
-app.use((req,res,next)=>{
-    console.log("Hi I am first Middleware");
-    next();
-    // console.log("this is after next");     it is execute bt dont write it
-    // return next();
-    // // console.log("this is after next");         it will not execute
-});
+// app.use((req,res,next)=>{
+//     console.log("Hi I am first Middleware");
+//     next();
+//     // console.log("this is after next");     it is execute bt dont write it
+//     // return next();
+//     // // console.log("this is after next");         it will not execute
+// });
 
 //logger->(same as morgan package)
 // app.use((req,res,next)=>{
@@ -80,52 +80,52 @@ app.use((req,res,next)=>{
 //use expresserror class
 
 // http://localhost:8000/api?token=giveaccess
-const checkToken=(req,res,next)=>{
-    let {token}=req.query;
-    if(token==="giveaccess"){
-        next();
-    }
-          //throw new Error ("denied access");
-        throw new expressErrorError (401,"denied access");    //status and msg pas kre hai
-};
+// const checkToken=(req,res,next)=>{
+//     let {token}=req.query;
+//     if(token==="giveaccess"){
+//         next();
+//     }
+//           //throw new Error ("denied access");
+//         throw new expressErrorError (401,"denied access");    //status and msg pas kre hai
+// };
 
 
-//api route
-app.get("/api",checkToken,(req,res)=>{
-    res.send("data");
-});
-
-
-
+// //api route
+// app.get("/api",checkToken,(req,res)=>{
+//     res.send("data");
+// });
 
 
 
-app.use((req,res,next)=>{
-    console.log("Hi I am  second Middleware");
-    next();
-});
 
-app.get("/",(req,res)=>{
-    res.send("I am root.");
-});
 
-app.get("/random",(req,res)=>{
-    res.send("I am random page.");
-});
+
+// app.use((req,res,next)=>{
+//     console.log("Hi I am  second Middleware");
+//     next();
+// });
+
+// app.get("/",(req,res)=>{
+//     res.send("I am root.");
+// });
+
+// app.get("/random",(req,res)=>{
+//     res.send("I am random page.");
+// });
 
 
 
                             //error handling
 
-app.get("/err",(req,res)=>{
-    abcd=abcud;
-})
-// error handling midleware
-app.use((err,req,res,next)=>{
-    console.log("-----Error-----");
-    // next(err);   //instead of calling next,we send error 
-    res.send(err);    //client side pe show krega
-});
+// app.get("/err",(req,res)=>{
+//     abcd=abcud;
+// })
+// // error handling midleware
+// app.use((err,req,res,next)=>{
+//     console.log("-----Error-----");
+//     // next(err);   //instead of calling next,we send error 
+//     res.send(err);    //client side pe show krega
+// });
 
 // app.use((err,req,res,next)=>{
 //     console.log("-----Error2 middleware-----");
@@ -140,9 +140,63 @@ app.use((err,req,res,next)=>{
 
 
 //404- if not found any route before then excute this
-app.use((Request,res)=>{
-    res.statusMessage(404).send("page not found");
+// app.use((Request,res)=>{
+//     res.statusMessage(404).send("page not found");
+// });
+
+
+
+
+                                // ---error handling---
+
+
+
+
+
+
+
+
+
+// http:localhost:8000/api?token=giveaccess
+const checkToken=(req,res,next)=>{
+    let {token}=req.query;
+    if(token==="giveaccess"){
+        next();
+    }
+          //throw new Error ("denied access");
+        throw new expressError (401,"denied access");    //status and msg pas kre hai
+};
+
+
+//api route
+app.get("/api",checkToken,(req,res)=>{
+    res.send("data");
 });
+                                                                        
+app.use((err,req,res,next)=>{
+    let {status,message}=err;
+    res.status(status).send(message);          //expressError (401,"denied access"); jo pass argument pass kiye wahi display hoga error hone pe
+
+});
+
+                                       
+
+
+
+
+// http://localhost:8000/err
+  app.get("/err",(req,res)=>{
+    abcd=abcud;
+})
+app.use((err,req,res,next)=>{
+    let {status=500,message="some error occured,this is example of default error msg "}=err;   //jb error defined ni kroge then default error show hoga
+    res.status(status).send(message);        
+
+});
+// abcud is not defined
+
+
+
 
 
 

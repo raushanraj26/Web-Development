@@ -1,5 +1,6 @@
 
       //initialise database
+//node init.js
 
 
 const mongoose = require('mongoose');
